@@ -8,8 +8,9 @@ import province.management.model.Province;
 import java.util.List;
 
 public interface CustomerService {
-//    Page<Customer> findAll(Pageable pageable);
-    List<Customer> findAll();
+   Page<Customer> findAll(Pageable pageable);
+
+   List<Customer> findAll();
 
     Customer findById(Long id) throws Exception;
 
@@ -17,7 +18,7 @@ public interface CustomerService {
 
     void remove(Long id);
 
-    List<Customer> findAllByProvince(Province province);
+    Iterable<Customer> findAllByProvince(Province province);
 
-//    Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable);
+    Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable);
 }

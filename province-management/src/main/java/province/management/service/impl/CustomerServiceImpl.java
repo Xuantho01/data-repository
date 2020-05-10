@@ -18,32 +18,24 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-//    @Override
-//    public Page<Customer> findAll(Pageable pageable) {
-//        return customerRepository.findAll(pageable);
-//    }
-
-@Override
-public List<Customer> findAll() {
-    return (List<Customer>) customerRepository.findAll();
-}
-
     @Override
-    public Customer findById(Long id) throws Exception {
-        Optional<Customer> customerOptional = customerRepository.findById(id);
-        if (customerOptional.isPresent()) {
-            return customerOptional.get();
-        }
-        throw new Exception("Not found customer has which id is "+ id);
+    public Page<Customer> findAll(Pageable pageable) {
+        return customerRepository.findAll(pageable);
     }
 
     @Override
-    public Customer save(Customer customer) throws DuplicateEmailException{
-        try {
-            return customerRepository.save(customer);
-        }catch (DataIntegrityViolationException e){
-            throw new DuplicateEmailException();
-        }
+    public List<Customer> findAll() {
+        return (List<Customer>) customerRepository.findAll();
+    }
+
+    @Override
+    public Customer findById(Long id) throws Exception {
+        return customerRepository.findById(id).get();
+    }
+
+    @Override
+    public Customer save(Customer customer) throws DuplicateEmailException {
+        return customerRepository.save(customer);
     }
 
     @Override
@@ -52,13 +44,12 @@ public List<Customer> findAll() {
     }
 
     @Override
-    public List<Customer> findAllByProvince(Province province) {
+    public Iterable<Customer> findAllByProvince(Province province) {
         return customerRepository.findAllByProvince(province);
     }
 
-//    @Override
-//    public Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable) {
-//        return customerRepository.findAllByFirstNameContaining(firstname,pageable);
-//    }
-
+    @Override
+    public Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable) {
+        return customerRepository.findAllByFirstNameContaining(firstname, pageable);
+    }
 }

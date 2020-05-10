@@ -1,6 +1,8 @@
 package province.management.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -29,21 +31,22 @@ public class CustomerController{
         return provinceService.findAll();
     }
 
+    @GetMapping("/customer")
+    public ModelAndView listCustomers(Pageable pageable) throws Exception {
+        Page<Customer> customers = customerService.findAll(pageable);
+        ModelAndView modelAndView = new ModelAndView("customer/index");
+        modelAndView.addObject("customers", customers);
+        return modelAndView;
+    }
+//
 //    @GetMapping("/customers")
-//    public ModelAndView listCustomers(Pageable pageable) throws Exception {
-//        Page<Customer> customers = customerService.findAll(pageable);
+//    public ModelAndView listCustomers() {
+//        List<Customer> customers = customerService.findAll();
 //        ModelAndView modelAndView = new ModelAndView("customer/index");
 //        modelAndView.addObject("customers", customers);
 //        return modelAndView;
 //    }
 
-    @GetMapping("/customers")
-    public ModelAndView listCustomers() throws Exception {
-        List<Customer> customers = customerService.findAll();
-        ModelAndView modelAndView = new ModelAndView("customer/index");
-        modelAndView.addObject("customers", customers);
-        return modelAndView;
-    }
 //    @PostMapping("/update")
 //    public ModelAndView updateCustomer(Customer customer) {
 //        try {

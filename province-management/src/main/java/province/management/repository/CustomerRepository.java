@@ -10,7 +10,8 @@ import province.management.model.Province;
 import java.util.List;
 
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
-   List<Customer> findAllByProvince(Province province);
-//   Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable);
+
+   Iterable<Customer> findAllByProvince(Province province);
+   Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable);
 //   Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable);
 }
