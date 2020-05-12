@@ -13,8 +13,8 @@ public class Province {
 
     private String name;
 
-    @OneToMany(mappedBy = "province")
-    private Set<Customer> customers;
+//    @OneToMany(mappedBy = "province")
+//    private Set<Customer> customers;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class Province {
         this.name = name;
     }
 
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
-    }
+//    public Set<Customer> getCustomers() {
+//        return customers;
+//    }
+//
+//    public void setCustomers(Set<Customer> customers) {
+//        this.customers = customers;
+//    }
 }

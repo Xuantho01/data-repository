@@ -19,9 +19,23 @@ public class Customer{
 
     private String phoneNumber;
 
+    private String profile;
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
     @Email
     @Column(unique = true)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "province_id")
+    private Province province;
 
     public String getEmail() {
         return email;
@@ -39,9 +53,7 @@ public class Customer{
         this.phoneNumber = phoneNumber;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "province_id")
-    private Province province;
+
 
     public Long getId() {
         return id;

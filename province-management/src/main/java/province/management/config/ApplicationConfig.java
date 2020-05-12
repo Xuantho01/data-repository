@@ -41,6 +41,7 @@ import java.util.Properties;
 @ComponentScan("province.management.controllers")
 @EnableJpaRepositories("province.management.repository")
 @EnableSpringDataWebSupport
+//@MultipartConfig
 public class ApplicationConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -50,6 +51,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         this.applicationContext = applicationContext;
     }
 
+//    @Bean(name = "multipartResolver")
+//    public CommonsMultipartResolver multipartResolver(){
+//        return  new CommonsMultipartResolver();
+//    }
     // thymeleaf
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
@@ -139,6 +144,8 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         messageSource.setBasenames("ValidationMessages");
         return messageSource;
     }
+
+
 
     @Bean
     public MyLogger myLogger() {

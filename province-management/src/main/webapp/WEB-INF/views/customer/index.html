@@ -7,28 +7,55 @@
 <body>
 <a href="/create-customer">Create new customer</a>
 <h1>Customers</h1>
+<form action="/search" method="post">
+    search by:
+    <input type="text" name="s">
+    <label>
+        <select name="searchType">
+            <option th:value ="firstName">First Name</option>
+            <option th:value = "lastName">last Name</option>
+        </select>
+    </label>
+    <input type="submit" value="Search">
+</form>
+<form action="/customer" method="post">
 <table border="1">
     <tr>
         <th>First name</th>
         <th>Last name</th>
         <th>Province</th>
         <th>Phone number</th>
+        <th>Email</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <th:block th:each="customer : ${customers}">
+    <th:block th:each="customer, iter : ${customers}">
         <tr>
+
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
             <td th:text="${customer.province.name}"></td>
             <td th:text="${customer.phoneNumber}"></td>
             <td th:text="${customer.email}"></td>
-
             <td><a th:href="@{/edit-customer/__${customer.id}__ }">Edit</a></td>
             <td><a th:href="@{/delete-customer/__${customer.id}__ }">Delete</a></td>
+            <td><input type="checkbox" name="starredCustomer" th:value="${customer.id}" th:checked="${isStarred[iter.index]}">
+            </td>
+
         </tr>
+
     </th:block>
 </table>
+        <button>Save</button>
+</form>
+<div th:if="${message}">
+    <h2 th:text="${message}"></h2>
+</div>
+<form action="/upload" method="post" enctype="multipart/form-data">
+Image:
+    <input type="file" name="image">
+    <input type="submit" value="Upload">
+</form>
 <div>
     <a th:href="@{'/customer'(page=${customers.number - 1})}" th:if="${customers.hasPrevious()}">Previous</a>
     <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>

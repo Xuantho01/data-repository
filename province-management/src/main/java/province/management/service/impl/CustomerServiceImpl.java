@@ -52,4 +52,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Page<Customer> findAllByFirstNameContaining(String firstname, Pageable pageable) {
         return customerRepository.findAllByFirstNameContaining(firstname, pageable);
     }
+
+    @Override
+    public Page<Customer> findAllByLastNameContaining(String lastName, Pageable pageable) {
+        return customerRepository.findAllByLastNameContaining(lastName,pageable);
+    }
 }
